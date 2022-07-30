@@ -39,9 +39,10 @@ for (row in 1:nrow(filtered_customer_data)) {
     }
     
     
-    ### with this loop we can isolate individual vitamin allele values for each SNP in the customer.
+    ### with this loop, we can isolate individual vitamin allele values for each SNP in the customer.
     ### now the goal is to check the customer genotypes to these values and label each SNP as heterozygous, homozygous, or nonvariant.
-    ### somehow, we need to check whether allele 1 and allele 2 in each row are the major or minor allele to label each SNP.
+    ### somehow, we need to check whether allele1 and allele2 in each row are the major or minor allele to label each SNP.
+    ### label allele1 and allele2 as major/minor separately first, then label the whole SNP as heterozygous/homozygous/nonvariant.
     ### remember, in the format 'A > G', A is the major (nonvariant) and G is the minor (variant) allele. 
     
     
