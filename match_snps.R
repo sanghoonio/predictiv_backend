@@ -47,7 +47,7 @@ for (row in 1:nrow(filtered_customer_data)) {
     
     
     ### by next wednesday (8/3), update this script to accomplish the goal, or come up with a written step-by-step plan to share in the meeting.
-    ### we will incorporate your changes and suggetsions to the script, and then discuss how to associate heterozygous/homozygous/nonvariant labels for 
+    ### we will incorporate your changes and suggestions to the script, and then discuss how to associate heterozygous/homozygous/nonvariant labels for 
     ### each SNP to the level of risk as according to sheet 1 on the updated vitamin table for next friday.
 }
 
