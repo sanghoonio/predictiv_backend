@@ -62,12 +62,18 @@ split_customer_data <- split(filtered_customer_data, filtered_customer_data$Vita
 ### ifelse example syntax: ifelse(1 == 1, '1 is 1', '1 is 2') will return '1 is 1'
 split_customer_data[['Vitamin A']]$Phenotype <- ifelse(length(which(split_customer_data[['Vitamin A']]$Genotype.Classification == 'Nonvariant')) == 2, 'Normal', ifelse((length(which(split_customer_data[['Vitamin A']]$Genotype.Classification == 'Nonvariant')) == 1) & (length(which(split_customer_data[['Vitamin A']]$Genotype.Classification == 'Heterozygous')) == 1), 'Below Average', 'Low'))
 split_customer_data[['Vitamin B6']]$Phenotype <- ifelse(split_customer_data[['Vitamin B6']]$Genotype.Classification == 'Homozygous', 'Low', ifelse(split_customer_data[['Vitamin B6']]$Genotype.Classification == 'Heterozygous', 'Below Average', 'No Variant'))
-### vitamin B9 todo
+split_customer_data[['Vitamin B9']]$Phenotype <- ifelse(split_customer_data[['Vitamin B9']]$Genotype.Classification == 'Homozygous', 'Low', ifelse(split_customer_data[['Vitamin B9']]$Genotype.Classification == 'Heterozygous', 'Below Average', 'No Variant'))
 split_customer_data[['Vitamin B12']]$Phenotype <- ifelse(split_customer_data[['Vitamin B12']]$Genotype.Classification == 'Homozygous', 'Above Average', 'Normal')
-### vitamin C todo
+split_customer_data[['Vitamin C']]$Phenotype <- ifelse(split_customer_data[['Vitamin C']]$Genotype.Classification == 'Nonvariant', 'Normal', 'Below Average')
 split_customer_data[['Vitamin D']]$Phenotype <- ifelse(length(which(split_customer_data[['Vitamin D']]$Genotype.Classification == 'Nonvariant')) == 3, 'Normal', ifelse((length(which(split_customer_data[['Vitamin D']]$Genotype.Classification == 'Nonvariant')) == 2) & (length(which(split_customer_data[['Vitamin D']]$Genotype.Classification == 'Heterozygous')) == 1), 'Below Average', 'Low'))
-### vitamin E todo
+split_customer_data[['Vitamin E']]$Phenotype <- ifelse(length(which(split_customer_data[['Vitamin E']]$Genotype.Classification == 'Nonvariant')) == 3, 'Normal', ifelse((length(which(split_customer_data[['Vitamin E']]$Genotype.Classification == 'Nonvariant')) == 2) & (length(which(split_customer_data[['Vitamin D']]$Genotype.Classification == 'Heterozygous')) == 1), 'Above Average', 'Well Above Average'))
 
-### we are very close to finishing! your task is to add the remaining conditional statements for vitamins B9, C, and E by friday (8/5/22).
-### on friday, we will go over your code and produce the output file for the front-end team.
-### please note: I had to make some updates to the data files since our last meeting, and so be sure to pull from the git repo.
+### combine split data back into a main dataframe
+final_customer_data <- unsplit(split_customer_data, filtered_customer_data$Vitamin)
+
+### sort data by vitamin alphabetically
+final_customer_data <- final_customer_data[str_order(final_customer_data$Vitamin, numeric = TRUE), ]
+
+### output excel file using customer ID in filename to output folder
+write.xlsx(final_customer_data, paste('output/', final_customer_data$Sample.ID[1], '_phenotypes.xlsx', sep = ''))
+
